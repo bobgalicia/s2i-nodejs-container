@@ -60,9 +60,6 @@ if [ -n "$NPM_MIRROR" ]; then
 	npm config set registry $NPM_MIRROR
 fi
 
-# Install newman
-npm install newman@${NEWMAN_VERSION}
-
 # Set the DEV_MODE to false by default.
 if [ -z "$DEV_MODE" ]; then
   export DEV_MODE=false
