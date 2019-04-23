@@ -20,7 +20,8 @@ ENV NODEJS_VERSION=6 \
     NPM_RUN=start \
     NAME=nodejs \
     NPM_CONFIG_PREFIX=$HOME/.npm-global \
-    PATH=$HOME/node_modules/.bin/:$HOME/.npm-global/bin/:$PATH
+    PATH=$HOME/node_modules/.bin/:$HOME/.npm-global/bin/:$PATH \
+    NEWMAN_VERSION="4.4.1"
 
 ENV SUMMARY="Platform for building and running Node.js $NODEJS_VERSION applications" \
     DESCRIPTION="Node.js $NODEJS_VERSION available as container is a base platform for \
@@ -69,5 +70,12 @@ RUN chown -R 1001:0 ${APP_ROOT} && chmod -R ug+rwx ${APP_ROOT} && \
 
 USER 1001
 
+RUN if [ ! $(echo $NEWMAN_VERSION | grep -oE "^[0-9]+\.[0-9]+\.[0-9]+$") ]; then \
+        echo "\033[0;31mA valid semver Newman version is required in the NEWMAN_VERSION build-arg\033[0m"; \
+        exit 1; \
+    fi && \
+    # Install Newman globally
+    npm install --global newman@${NEWMAN_VERSION};
+    
 # Set the default CMD to print the usage of the language image
 CMD $STI_SCRIPTS_PATH/usage
