@@ -70,3 +70,6 @@ USER 1001
 
 # Set the default CMD to print the usage of the language image
 CMD $STI_SCRIPTS_PATH/usage
+
+# Install npm newman package
+RUN npm config set proxy 'http://proxy-de.glb.my-it-solutions.net:84' && npm install newman@4.4.1
