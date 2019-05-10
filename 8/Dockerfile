@@ -1,4 +1,4 @@
-FROM rhscl/nodejs-8-rhel7
+FROM registry.access.redhat.com/rhscl/nodejs-8-rhel7
 
 # This image provides a Node.JS environment you can use to run your Node.JS
 # applications.
